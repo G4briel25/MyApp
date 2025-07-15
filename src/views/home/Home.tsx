@@ -1,6 +1,6 @@
 import React from 'react';
-import { HomeContainer, HomeTitle, BodyContainer, BodyTitle, BodySubTitle, MesaContainer, HomeContainerTitle } from '../../styles/styleCss';
-import MesaCard from '../../components/MesaCard/MesaCard';
+import { HomeContainer, HomeTitle, BodyContainer, BodyTitle, BodySubTitle, CardContainer, HomeContainerTitle } from '../../styles/styleCss';
+import CardsHome from '../../components/CardsHome/CardsHome';
 
 export default function HomeScreen() {
     return (
@@ -13,12 +13,12 @@ export default function HomeScreen() {
               <BodyTitle>Caixa 10</BodyTitle>
               <BodySubTitle>Zigpi Restaurante</BodySubTitle>
 
-              <MesaContainer>
-                <MesaCard></MesaCard>
-                <MesaCard></MesaCard>
-                <MesaCard></MesaCard>
-                <MesaCard></MesaCard>
-              </MesaContainer>
+              <CardContainer>
+                <CardsHome></CardsHome>
+                <CardsHome></CardsHome>
+                <CardsHome></CardsHome>
+                <CardsHome></CardsHome>
+              </CardContainer>
 
             </BodyContainer>
         </HomeContainer>

@@ -37,7 +37,7 @@ const BodySubTitle = styled.Text`
   font-family: 'Poppins-Lighy';
 `;
 
-const MesaContainer = styled.View`
+const CardContainer = styled.View`
   margin-top: 20px;
   flex-direction: row;
   flex-wrap: wrap;
@@ -45,8 +45,8 @@ const MesaContainer = styled.View`
 `;
 
 
-// Componente MesaCards
-const MesaCards = styled.View`
+// Componente CardsHome
+const Cards = styled.View`
   padding: 16px;
   background-color: #F4F2F2;
   border-radius: 8px;
@@ -57,7 +57,7 @@ const MesaCards = styled.View`
   justify-content: space-between;
 `;
 
-const MesaTitle = styled.Text`
+const CardTitle = styled.Text`
   font-size: 17px;
   color: #212121;
 `;
@@ -189,6 +189,38 @@ const MapaAtendimentoTouchTitle = styled.Text`
   text-align: center;
 `;
 
+const MapaAtendimentoMesa = styled.View`
+  padding: 16px;
+`;
+
+
+// Componente CardMesa
+const CardMesaContainer = styled.TouchableOpacity`
+  background-color: #B8E5B8;
+  border-radius: 8px;
+  padding: 16px;
+  flex: 1;
+  margin: 4px;
+  min-height: 120px;
+`;
+
+const CardMesaNumero = styled.Text`
+  font-size: 24px;
+  font-family: 'Poppins-Medium';
+  margin-bottom: 8px;
+`;
+
+const CardMesaDetails = styled.View`
+  flex: 1;
+`;
+
+const CardMesaFrame = styled.View`
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 2px;
+`;
+
 export {
   HomeContainer,
   HomeContainerTitle,
@@ -196,9 +228,9 @@ export {
   BodyContainer,
   BodyTitle,
   BodySubTitle,
-  MesaContainer,
-  MesaCards,
-  MesaTitle,
+  CardContainer,
+  Cards,
+  CardTitle,
   NovoPedidoContainer,
   DivBar,
   NovoPedidoTitle,
@@ -215,4 +247,9 @@ export {
   MapaAtendimentoBotoes,
   MapaAtendimentoTouchableOpacity,
   MapaAtendimentoTouchTitle,
+  MapaAtendimentoMesa,
+  CardMesaContainer,
+  CardMesaNumero,
+  CardMesaDetails,
+  CardMesaFrame,
 };
