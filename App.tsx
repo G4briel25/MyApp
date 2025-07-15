@@ -12,8 +12,8 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name='Mapa Atendimento' component={MapaAtendimento} options={{ headerShown: false }} />
-        <Stack.Screen name='Novo Pedido' component={ModalNovoPedido} options={{ headerShown: false }} />
         <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
+        <Stack.Screen name='Novo Pedido' component={ModalNovoPedido} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
   );

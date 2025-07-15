@@ -1,4 +1,3 @@
-import { Text, View } from "react-native";
 import { DivBar, NodoPedidoSubTitle, NovoPedidoContainer, NovoPedidoTitle } from '../../styles/styleCss';
 import TipoPedido from "../../components/TipoPedido/TipoPedido";
 

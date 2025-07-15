@@ -1,11 +1,13 @@
 import React from 'react';
-import { HomeContainer, HomeTitle, BodyContainer, BodyTitle, BodySubTitle, MesaContainer } from '../../styles/styleCss';
+import { HomeContainer, HomeTitle, BodyContainer, BodyTitle, BodySubTitle, MesaContainer, HomeContainerTitle } from '../../styles/styleCss';
 import MesaCard from '../../components/MesaCard/MesaCard';
 
 export default function HomeScreen() {
     return (
         <HomeContainer>
-            <HomeTitle>Pigz Comanda</HomeTitle>
+            <HomeContainerTitle>
+              <HomeTitle>Pigz Comanda</HomeTitle>
+            </HomeContainerTitle>
 
             <BodyContainer>
               <BodyTitle>Caixa 10</BodyTitle>
