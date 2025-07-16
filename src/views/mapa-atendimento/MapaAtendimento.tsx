@@ -1,19 +1,20 @@
+import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
-import { FlatList, TouchableOpacity } from 'react-native';
+import { FlatList } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import CardMesa from '../../components/CardMesa/CardMesa';
+import HeaderGlobal from '../../components/HeaderGlobal/HeaderGlobal';
 import {
     MapaAtendimentoBotoes,
     MapaAtendimentoContainer,
-    MapaAtendimentoHeader,
     MapaAtendimentoInput,
     MapaAtendimentoMesa,
     MapaAtendimentoPesquisa,
-    MapaAtendimentoTitle,
     MapaAtendimentoTouchableOpacity,
     MapaAtendimentoTouchTitle
 } from "../../styles/styleCss";
-import CardMesa from '../../components/CardMesa/CardMesa';
-import { Mesa, TipoFiltro, ButtonRenderProps, CardRenderProps } from "../../types";
+import { ButtonRenderProps, CardRenderProps, Mesa, TipoFiltro } from "../../types";
+import { COLORS } from '../../types/colors';
 
 const mesas: Mesa[] = [
     { id: 1, nome: "João", tempo: "10min", valor: "R$ 75,00", servico: "Teste" },
@@ -39,6 +40,9 @@ const otherButtons: TipoFiltro[] = [
 ];
 
 export default function MapaAtendimento() {
+
+    const navigation = useNavigation<any>();
+
     const [activeButton, setActiveButton] = useState<TipoFiltro>('Visão Geral');
 
     const renderButton = ({ item }: ButtonRenderProps) => (
@@ -58,15 +62,13 @@ export default function MapaAtendimento() {
 
     return (
         <MapaAtendimentoContainer>
-            <MapaAtendimentoHeader>
-                <TouchableOpacity onPress={() => console.log('Voltar pressionado')}>
-                    <Icon name="arrow-back" size={32} color="#FA641E" />
-                </TouchableOpacity>
-                <MapaAtendimentoTitle>Mapa de atendimento</MapaAtendimentoTitle>
-            </MapaAtendimentoHeader>
+            <HeaderGlobal
+                title='Mapa de atendimento'
+                onBackPress={() => navigation.goBack()}
+            />
 
             <MapaAtendimentoPesquisa>
-                <Icon name="search" size={32} color="#FA641E" />
+                <Icon name="search" size={32} color={COLORS.COLOR_PIGZ} />
                 <MapaAtendimentoInput placeholder="Cliente, mesa, comanda, atendente"></MapaAtendimentoInput>
             </MapaAtendimentoPesquisa>
 

@@ -2,14 +2,20 @@ import React from 'react';
 import { Text, View} from "react-native";
 import { Cards, CardTitle } from "../../styles/styleCss";
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { CardsHomeProps } from '../../types/cardsHomeProps';
 
-export default function CardsHome() {
+export default function CardsHome({ 
+    iconName,
+    title,
+    iconSize = 32,
+    onPress
+}: CardsHomeProps) {
     return (
-        <Cards>
+        <Cards onPress={onPress}>
             <View>
-                <Icon name="settings" size={32} />
+                <Icon name={iconName} size={iconSize} />
             </View>
-            <CardTitle>Mapa de atendimento</CardTitle>
+            <CardTitle>{title}</CardTitle>
         </Cards>
     );
 }

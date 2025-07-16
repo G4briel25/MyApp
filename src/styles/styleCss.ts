@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import { COLORS } from '../types/colors';
 
 const HomeContainer = styled.View`
   background-color: #FFF;
@@ -9,15 +10,17 @@ const HomeContainerTitle = styled.View`
   padding: 10px 0;
   border-bottom-width: 1px;
   border-bottom-color: #DDD;
-  border-bottom-style: solid;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
 `;
 
 const HomeTitle = styled.Text`
-  background-color: #FFF;
   font-size: 28px;
-  text-align: center;
   font-family: 'Poppins-Light';
-  color: #EF5E1A;
+  margin-top:2px;
+  color: ${COLORS.COLOR_PIGZ};
 `;
 
 const BodyContainer = styled.View`
@@ -46,8 +49,8 @@ const CardContainer = styled.View`
 
 
 // Componente CardsHome
-const Cards = styled.View`
-  padding: 16px;
+const Cards = styled.TouchableOpacity`
+  padding: 16px 16px 20px 16px;
   background-color: #F4F2F2;
   border-radius: 8px;
   height: 156px;
@@ -65,18 +68,16 @@ const CardTitle = styled.Text`
 
 // Componente ModalNovoPedido
 const NovoPedidoContainer = styled.View`
-  flex: 1;
-  display: flex;
-  align-items: center;
-  width: 100%;
-  height: 56px;
+  background-color: white;
   padding: 12px 16px 16px 16px;
   border-radius: 16px 16px 0 0;
+  min-height: 400px;
+  align-items: center;
 `;
 
 const DivBar = styled.View`
-  border-bottom-width: 2px;
-  width: 32px;
+  border-bottom-width: 3px;
+  width: 40px;
   border-radius: 8px;
   border-bottom-color: #BABABA;
   border-bottom-style: solid;
@@ -84,20 +85,22 @@ const DivBar = styled.View`
 `;
 
 const NovoPedidoTitle = styled.Text`
-  font-size: 16px;
+  font-size: 18px;
   font-family: 'Poppins-Medium';
+  margin-bottom: 10px;
 `;
 
 const NodoPedidoSubTitle = styled.Text`
-  font-size: 16px;
+  font-size: 15px;
   font-family: 'Poppins-Light';
-  margin-bottom: 16px;
+  margin-bottom: 20px;
+  color: #666;
 `;
 
 
 // Componente TipoPedido
-const TipoPedidoContainer = styled.View`
-  background-color: #dfdfdfff;
+const TipoPedidoContainer = styled.TouchableOpacity`
+  background-color: #F4F2F2;
   padding: 16px;
   height: 66px;
   width: 100%;
@@ -146,6 +149,7 @@ const MapaAtendimentoTitle = styled.Text`
   font-size: 16px;
   margin-left: 10px;
   font-family: 'Poppins-Medium';
+  line-height: 32px;
 `;
 
 const MapaAtendimentoPesquisa = styled.View`
