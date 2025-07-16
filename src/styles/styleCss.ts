@@ -170,7 +170,7 @@ const MapaAtendimentoBotoes = styled.View`
   align-items: center;
 `;
 
-const MapaAtendimentoTouchableOpacity = styled.TouchableOpacity`
+const MapaAtendimentoTouchableOpacity = styled.TouchableOpacity<{isActive: boolean}>`
   height: 32px;
   border-radius: 16px;
   background-color: ${props => props.isActive ? '#000' : '#FFF'};
@@ -182,7 +182,7 @@ const MapaAtendimentoTouchableOpacity = styled.TouchableOpacity`
   margin-right: 10px;
 `;
 
-const MapaAtendimentoTouchTitle = styled.Text`
+const MapaAtendimentoTouchTitle = styled.Text<{isActive: boolean}>`
   font-size: 16px;
   font-family: 'Poppins-Medium';
   color: ${props => props.isActive ? '#FFF' : '#000'};
@@ -190,7 +190,8 @@ const MapaAtendimentoTouchTitle = styled.Text`
 `;
 
 const MapaAtendimentoMesa = styled.View`
-  padding: 16px;
+  flex: 1;
+  padding: 8px;
 `;
 
 
@@ -199,9 +200,10 @@ const CardMesaContainer = styled.TouchableOpacity`
   background-color: #B8E5B8;
   border-radius: 8px;
   padding: 16px;
-  flex: 1;
   margin: 4px;
   min-height: 120px;
+  flex-basis: 30%;
+  max-width: 30%;
 `;
 
 const CardMesaNumero = styled.Text`

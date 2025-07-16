@@ -1,8 +1,9 @@
 import { Text, View } from "react-native";
 import { CardMesaContainer, CardMesaFrame, CardMesaNumero } from "../../styles/styleCss";
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { CardMesaProps } from "../../types";
 
-export default function CardMesa({mesa}) {
+export default function CardMesa({ mesa }: CardMesaProps) {
     return (
         <CardMesaContainer>
             <View>
