@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
-import React, { useState } from 'react';
-import { FlatList } from 'react-native';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { ActivityIndicator, Alert, FlatList, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import CardMesa from '../../components/CardMesa/CardMesa';
 import HeaderGlobal from '../../components/HeaderGlobal/HeaderGlobal';
@@ -15,21 +15,7 @@ import {
 } from "../../styles/styleCss";
 import { ButtonRenderProps, CardRenderProps, Mesa, TipoFiltro } from "../../types";
 import { COLORS } from '../../types/colors';
-
-const mesas: Mesa[] = [
-    { id: 1, nome: "João", tempo: "10min", valor: "R$ 75,00", servico: "Teste" },
-    { id: 2, nome: "Maria", tempo: "15min", valor: "R$ 120,00", servico: "Almoço" },
-    { id: 3, nome: "Pedro", tempo: "5min", valor: "R$ 45,00", servico: "Lanche" },
-    { id: 4, nome: "Ana", tempo: "20min", valor: "R$ 200,00", servico: "Jantar" },
-    { id: 5, nome: "Carlos", tempo: "8min", valor: "R$ 85,00", servico: "Café" },
-    { id: 6, nome: "Lucia", tempo: "12min", valor: "R$ 95,00", servico: "Bebida" },
-    { id: 7, nome: "Lucia", tempo: "12min", valor: "R$ 95,00", servico: "Bebida" },
-    { id: 8, nome: "Lucia", tempo: "12min", valor: "R$ 95,00", servico: "Bebida" },
-    { id: 9, nome: "Lucia", tempo: "12min", valor: "R$ 95,00", servico: "Bebida" },
-    { id: 10, nome: "Lucia", tempo: "12min", valor: "R$ 95,00", servico: "Bebida" },
-    { id: 11, nome: "Lucia", tempo: "12min", valor: "R$ 95,00", servico: "Bebida" },
-    { id: 12, nome: "Lucia", tempo: "12min", valor: "R$ 95,00", servico: "Bebida" },
-];
+import mesaService from '../../services/mesaService';
 
 const otherButtons: TipoFiltro[] = [
     'Em antendimento',
@@ -42,13 +28,124 @@ const otherButtons: TipoFiltro[] = [
 export default function MapaAtendimento() {
 
     const navigation = useNavigation<any>();
+    const flatListRef = useRef<FlatList>(null);
+    const filterScrollRef = useRef<FlatList>(null);
 
+    // Estados
+    const [mesas, setMesas] = useState<Mesa[]>([]);
+    const [mesasFiltradas, setMesasFiltradas] = useState<Mesa[]>([]);
+    const [loading, setLoading] = useState(false);
+    const [refreshing, setRefreshing] = useState(false);
     const [activeButton, setActiveButton] = useState<TipoFiltro>('Visão Geral');
+    const [searchText, setSearchText] = useState('');
+    const [page, setPage] = useState(1);
+    const [hasMore, setHasMore] = useState(true);
+
+    // loadMesas iniciais
+    useEffect(() => {
+        loadMesas();
+    }, []);
+
+    // Aplicar filtros quando mudarem
+    useEffect(() => {
+        
+    }, [mesas, activeButton, searchText]);
+
+    const loadMesas = async (pageNumber: number = 1, isRefresh: boolean = false) => {
+        if(loading && !isRefresh) return;
+
+        try {
+            setLoading(true);
+            const response = await mesaService.getMesasAll();
+            
+            if(isRefresh || pageNumber === 1) {
+                setMesas(response);
+                setPage(1);
+                setHasMore(response.length === 20);
+            } else {
+                setMesas(prev => [...prev, ...response]);
+                setHasMore(response.length === 20);
+            }
+        } catch {
+            Alert.alert('Erro', 'Não foi possível carregar as mesas.')
+        } finally {
+            setLoading(false);
+            setRefreshing(false);
+        }
+    };
+
+    const onRefresh = useCallback(() => {
+        setRefreshing(true);
+        setPage(1);
+        loadMesas(1, true);
+    }, []);
+
+    const loadMoreMesas = () => {
+        if (hasMore && !loading) {
+            const nextPage = page + 1;
+            setPage(nextPage);
+            loadMesas(nextPage);
+        }
+    };
+
+    const applyFilters = () => {
+        let filtered = [...mesas];
+
+        if(searchText.trim()) {
+            filtered = filtered.filter(mesa => 
+                mesa.cliente?.toLocaleLowerCase().includes(searchText.toLowerCase()) ||
+                mesa.numero?.toString().includes(searchText) ||
+                mesa.atendente?.toLocaleLowerCase().includes(searchText.toLowerCase())
+            );
+        }
+
+        switch (activeButton) {
+            case 'Em antendimento':
+                filtered = filtered.filter(mesa => mesa.status === 'ocupada');
+                break;
+            case 'Ociosas':
+                filtered = filtered.filter(mesa => mesa.status === 'livre');
+                break;
+            case 'Disponíveis':
+                filtered = filtered.filter(mesa => mesa.status === 'livre');
+                break;
+            case 'Sem pedidos':
+                filtered = filtered.filter(mesa => mesa.valorTotal === 0 && mesa.status === 'ocupada');
+                break;
+            case 'Meus atendimentos':
+                filtered = filtered.filter(mesa => mesa.atendente === 'Ghabrichelso');
+                break;
+            case 'Visão Geral':
+                default:
+                    break;
+        }
+
+        setMesasFiltradas(filtered);
+    };
+
+    const handlerFilterPress = (filtro: TipoFiltro) => {
+        setActiveButton(filtro);
+
+        if(flatListRef.current) {
+            flatListRef.current.scrollToOffset({ offset: 0, animated: true });
+        }
+
+        if(filtro != 'Visão Geral' && filterScrollRef.current) {
+            const index = otherButtons.indexOf(filtro);
+            if(index != -1) {
+                filterScrollRef.current.scrollToIndex({
+                    index,
+                    animated: true,
+                    viewPosition: 0.5
+                })
+            }
+        }
+    }
 
     const renderButton = ({ item }: ButtonRenderProps) => (
         <MapaAtendimentoTouchableOpacity
             isActive={activeButton === item}
-            onPress={() => setActiveButton(item as TipoFiltro)}
+            onPress={() => handlerFilterPress(item as TipoFiltro)}
         >
             <MapaAtendimentoTouchTitle isActive={activeButton === item}>
                 {item}
@@ -60,6 +157,16 @@ export default function MapaAtendimento() {
         <CardMesa mesa={item} />
     );
 
+    const renderFooter = () => {
+        if(!loading) return null;
+
+        return (
+            <View style={{ padding: 16, alignItems: 'center' }}>
+                <ActivityIndicator size="small" color={COLORS.COLOR_PIGZ} />
+            </View>
+        );
+    };
+
     return (
         <MapaAtendimentoContainer>
             <HeaderGlobal
@@ -69,13 +176,17 @@ export default function MapaAtendimento() {
 
             <MapaAtendimentoPesquisa>
                 <Icon name="search" size={32} color={COLORS.COLOR_PIGZ} />
-                <MapaAtendimentoInput placeholder="Cliente, mesa, comanda, atendente"></MapaAtendimentoInput>
+                <MapaAtendimentoInput 
+                    placeholder="Cliente, mesa, comanda, atendente"
+                    value={searchText}
+                    onChangeText={setSearchText}
+                />
             </MapaAtendimentoPesquisa>
 
             <MapaAtendimentoBotoes>
                 <MapaAtendimentoTouchableOpacity
                     isActive={activeButton === 'Visão Geral'}
-                    onPress={() => setActiveButton('Visão Geral')}
+                    onPress={() => handlerFilterPress('Visão Geral')}
                 >
                     <MapaAtendimentoTouchTitle
                         isActive={activeButton === 'Visão Geral'}
@@ -85,18 +196,21 @@ export default function MapaAtendimento() {
                 </MapaAtendimentoTouchableOpacity>
 
                 <FlatList<TipoFiltro>
+                    ref={filterScrollRef}
                     data={otherButtons}
                     renderItem={renderButton}
                     keyExtractor={(item, index) => index.toString()}
                     horizontal
                     showsHorizontalScrollIndicator={false}
                     style={{ flex: 1 }}
+                    onScrollToIndexFailed={() => {}}
                 />
             </MapaAtendimentoBotoes>
 
             <MapaAtendimentoMesa>
                 <FlatList<Mesa>
-                    data={mesas}
+                    ref={flatListRef}
+                    data={mesasFiltradas}
                     renderItem={renderCard}
                     keyExtractor={(item) => item.id.toString()}
                     numColumns={3}
@@ -110,6 +224,11 @@ export default function MapaAtendimento() {
                     }}
                     showsVerticalScrollIndicator={false}
                     style={{ flex: 1 }}
+                    onRefresh={onRefresh}
+                    refreshing={refreshing}
+                    onEndReached={loadMoreMesas}
+                    onEndReachedThreshold={0.1}
+                    ListFooterComponent={renderFooter}
                 />
             </MapaAtendimentoMesa>
         </MapaAtendimentoContainer>

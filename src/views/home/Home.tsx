@@ -27,19 +27,19 @@ export default function HomeScreen() {
 
             <CardContainer>
               <CardsHome 
-                  iconName="add" 
+                  iconName="add"
                   title="Novo Pedido"
                   iconSize={32}
                   onPress={openModal}
               />
               <CardsHome 
-                  iconName="grid-view" 
+                  iconName="grid-view"
                   title="Mapa de atendimento"
                   iconSize={32}
                   onPress={() => navigation.navigate('MapaAtendimento')}
               />
               <CardsHome 
-                  iconName="settings" 
+                  iconName="settings"
                   title="Configurações"
                   iconSize={32}
               />

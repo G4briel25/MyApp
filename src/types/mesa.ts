@@ -1,9 +1,15 @@
 export interface Mesa {
-    id: string | number;
-    nome: string;
-    tempo: string;
-    valor: string;
-    servico: string;
+  id: number;
+  numero: number;
+  status: 'ocupada' | 'livre' | 'reservada';
+  cliente: string | null;  // Nome ou número de clientes
+  numeroClientes: number;
+  numeroComandas: number;
+  tempoEmAberto: number; // Em minutos
+  atendente: string | null;
+  valorTotal: number;
+  cor: 'verde' | 'vermelha' | 'amarela' | 'cinza';
+  ultimoPedido: string | null;
 }
 
 export interface CardMesaProps {
