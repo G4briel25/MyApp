@@ -1,5 +1,6 @@
 import styled from 'styled-components/native';
-import { COLORS } from '../types/colors';
+import { COLORS, coresMap } from '../types/colors';
+import { CardMesaContainerProps } from '../types/cardMesaContainerProps';
 
 const HomeContainer = styled.View`
   background-color: #FFF;
@@ -200,14 +201,18 @@ const MapaAtendimentoMesa = styled.View`
 
 
 // Componente CardMesa
-const CardMesaContainer = styled.TouchableOpacity`
-  background-color: #B8E5B8;
+const CardMesaContainer = styled.TouchableOpacity<CardMesaContainerProps>`
+  background-color: ${ ({cor}) => coresMap[cor] };
   border-radius: 8px;
-  padding: 16px;
+  padding: 12px;
   margin: 4px;
   min-height: 120px;
   flex-basis: 30%;
   max-width: 30%;
+`;
+
+const CardMesaClienteComanda = styled.View`
+  flex-direction: row;
 `;
 
 const CardMesaNumero = styled.Text`
@@ -225,6 +230,11 @@ const CardMesaFrame = styled.View`
   align-items: center;
   gap: 4px;
   margin-bottom: 2px;
+`;
+
+const CardMesaFrameText = styled.Text`
+  font-size: 12px;
+  max-width: 80%;
 `;
 
 export {
@@ -258,4 +268,6 @@ export {
   CardMesaNumero,
   CardMesaDetails,
   CardMesaFrame,
+  CardMesaClienteComanda,
+  CardMesaFrameText
 };

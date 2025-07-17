@@ -8,7 +8,7 @@ export interface Mesa {
   tempoEmAberto: number; // Em minutos
   atendente: string | null;
   valorTotal: number;
-  cor: 'verde' | 'vermelha' | 'amarela' | 'cinza';
+  cor: 'verde' | 'vermelho' | 'amarelo' | 'branco';
   ultimoPedido: string | null;
 }
 

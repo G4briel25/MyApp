@@ -2,7 +2,7 @@ import { Mesa } from './mesa';
 
 export type TipoFiltro = 
     | 'Visão Geral'
-    | 'Em antendimento'
+    | 'Em atendimento'
     | 'Ociosas'
     | 'Disponíveis'
     | 'Sem pedidos'

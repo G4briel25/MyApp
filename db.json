@@ -23,7 +23,7 @@
       "tempoEmAberto": 0,
       "atendente": null,
       "valorTotal": 0,
-      "cor": "cinza",
+      "cor": "branco",
       "ultimoPedido": null
     },
     {
@@ -36,7 +36,7 @@
       "tempoEmAberto": 0,
       "atendente": null,
       "valorTotal": 0,
-      "cor": "cinza",
+      "cor": "branco",
       "ultimoPedido": null
     },
     {
@@ -49,7 +49,7 @@
       "tempoEmAberto": 0,
       "atendente": null,
       "valorTotal": 0,
-      "cor": "cinza",
+      "cor": "branco",
       "ultimoPedido": null
     },
     {
@@ -62,7 +62,7 @@
       "tempoEmAberto": 15,
       "atendente": "Leonercio",
       "valorTotal": 34.56,
-      "cor": "vermelha",
+      "cor": "vermelho",
       "ultimoPedido": "2025-01-16T09:55:00Z"
     },
     {
@@ -75,7 +75,7 @@
       "tempoEmAberto": 2,
       "atendente": "Leonercio",
       "valorTotal": 0,
-      "cor": "amarela",
+      "cor": "amarelo",
       "ultimoPedido": "2025-01-16T10:08:00Z"
     },
     {
@@ -88,7 +88,7 @@
       "tempoEmAberto": 0,
       "atendente": null,
       "valorTotal": 0,
-      "cor": "cinza",
+      "cor": "branco",
       "ultimoPedido": null
     },
     {
@@ -101,7 +101,7 @@
       "tempoEmAberto": 0,
       "atendente": null,
       "valorTotal": 0,
-      "cor": "cinza",
+      "cor": "branco",
       "ultimoPedido": null
     },
     {
@@ -114,7 +114,7 @@
       "tempoEmAberto": 0,
       "atendente": null,
       "valorTotal": 0,
-      "cor": "cinza",
+      "cor": "branco",
       "ultimoPedido": null
     },
     {
@@ -127,7 +127,7 @@
       "tempoEmAberto": 0,
       "atendente": null,
       "valorTotal": 0,
-      "cor": "cinza",
+      "cor": "branco",
       "ultimoPedido": null
     },
     {
@@ -138,7 +138,7 @@
       "numeroClientes": 6,
       "numeroComandas": 3,
       "tempoEmAberto": 9,
-      "atendente": "Ghabrichelso",
+      "atendente": "Ghabrichelson",
       "valorTotal": 34.56,
       "cor": "verde",
       "ultimoPedido": "2025-01-16T10:01:00Z"
@@ -151,22 +151,22 @@
       "numeroClientes": 1,
       "numeroComandas": 1,
       "tempoEmAberto": 17,
-      "atendente": "Ghabrichelso",
+      "atendente": "Ghabrichelson",
       "valorTotal": 34.56,
-      "cor": "vermelha",
+      "cor": "vermelho",
       "ultimoPedido": "2025-01-16T09:53:00Z"
     },
     {
       "id": 13,
       "numero": 13,
-      "status": "reservada",
+      "status": "ocupada",
       "cliente": "Ana Silva",
       "numeroClientes": 4,
       "numeroComandas": 0,
       "tempoEmAberto": 0,
       "atendente": "Leonercio",
       "valorTotal": 0,
-      "cor": "azul",
+      "cor": "amarelo",
       "ultimoPedido": null
     },
     {
@@ -192,7 +192,7 @@
       "tempoEmAberto": 25,
       "atendente": "João",
       "valorTotal": 125.40,
-      "cor": "vermelha",
+      "cor": "vermelho",
       "ultimoPedido": "2025-01-16T09:45:00Z"
     },
     {
@@ -205,7 +205,7 @@
       "tempoEmAberto": 1,
       "atendente": "Ana",
       "valorTotal": 0,
-      "cor": "amarela",
+      "cor": "amarelo",
       "ultimoPedido": "2025-01-16T10:09:00Z"
     },
     {
@@ -218,7 +218,7 @@
       "tempoEmAberto": 0,
       "atendente": null,
       "valorTotal": 0,
-      "cor": "cinza",
+      "cor": "branco",
       "ultimoPedido": null
     },
     {
@@ -229,7 +229,7 @@
       "numeroClientes": 1,
       "numeroComandas": 1,
       "tempoEmAberto": 8,
-      "atendente": "Ghabrichelso",
+      "atendente": "Ghabrichelson",
       "valorTotal": 42.30,
       "cor": "verde",
       "ultimoPedido": "2025-01-16T10:02:00Z"
@@ -244,7 +244,7 @@
       "tempoEmAberto": 20,
       "atendente": "Maria",
       "valorTotal": 189.75,
-      "cor": "vermelha",
+      "cor": "vermelho",
       "ultimoPedido": "2025-01-16T09:50:00Z"
     },
     {
@@ -257,20 +257,20 @@
       "tempoEmAberto": 0,
       "atendente": null,
       "valorTotal": 0,
-      "cor": "cinza",
+      "cor": "branco",
       "ultimoPedido": null
     },
     {
       "id": 21,
       "numero": 21,
-      "status": "reservada",
-      "cliente": "Família Santos",
+      "status": "ocupada",
+      "cliente": null,
       "numeroClientes": 6,
       "numeroComandas": 0,
       "tempoEmAberto": 0,
       "atendente": "João",
       "valorTotal": 0,
-      "cor": "azul",
+      "cor": "amarelo",
       "ultimoPedido": null
     },
     {
@@ -283,7 +283,7 @@
       "tempoEmAberto": 12,
       "atendente": "Ana",
       "valorTotal": 67.80,
-      "cor": "vermelha",
+      "cor": "vermelho",
       "ultimoPedido": "2025-01-16T09:58:00Z"
     },
     {
@@ -296,7 +296,7 @@
       "tempoEmAberto": 3,
       "atendente": "Leonercio",
       "valorTotal": 0,
-      "cor": "amarela",
+      "cor": "amarelo",
       "ultimoPedido": "2025-01-16T10:07:00Z"
     },
     {
@@ -309,7 +309,7 @@
       "tempoEmAberto": 0,
       "atendente": null,
       "valorTotal": 0,
-      "cor": "cinza",
+      "cor": "branco",
       "ultimoPedido": null
     },
     {
@@ -335,7 +335,7 @@
       "tempoEmAberto": 18,
       "atendente": "João",
       "valorTotal": 156.20,
-      "cor": "vermelha",
+      "cor": "vermelho",
       "ultimoPedido": "2025-01-16T09:52:00Z"
     },
     {
@@ -348,7 +348,7 @@
       "tempoEmAberto": 0,
       "atendente": null,
       "valorTotal": 0,
-      "cor": "cinza",
+      "cor": "branco",
       "ultimoPedido": null
     },
     {
@@ -359,9 +359,9 @@
       "numeroClientes": 1,
       "numeroComandas": 1,
       "tempoEmAberto": 4,
-      "atendente": "Ghabrichelso",
+      "atendente": "Ghabrichelson",
       "valorTotal": 0,
-      "cor": "amarela",
+      "cor": "amarelo",
       "ultimoPedido": "2025-01-16T10:06:00Z"
     },
     {
@@ -374,7 +374,7 @@
       "tempoEmAberto": 0,
       "atendente": null,
       "valorTotal": 0,
-      "cor": "cinza",
+      "cor": "branco",
       "ultimoPedido": null
     },
     {
@@ -399,7 +399,7 @@
     },
     {
       "id": 2,
-      "nome": "Ghabrichelso",
+      "nome": "Ghabrichelson",
       "ativo": true
     },
     {

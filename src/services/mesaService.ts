@@ -3,7 +3,7 @@ import axios from 'axios';
 const mesaService = {
     getMesasAll: async () => {
         try {
-            const API_MESA_URL = `http://localhost:3000/mesas`;
+            const API_MESA_URL = `http://192.168.11.224:3000/mesas`;
             const response = await axios.get(API_MESA_URL);
             return response.data;
         } catch (error) {
