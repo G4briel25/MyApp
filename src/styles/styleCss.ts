@@ -38,7 +38,7 @@ const BodyTitle = styled.Text`
 
 const BodySubTitle = styled.Text`
   font-size: 16px;
-  font-family: 'Poppins-Lighy';
+  font-family: 'Poppins-Light';
 `;
 
 const CardContainer = styled.View`
@@ -196,7 +196,6 @@ const MapaAtendimentoTouchTitle = styled.Text<{isActive: boolean}>`
 
 const MapaAtendimentoMesa = styled.View`
   flex: 1;
-  padding: 8px;
 `;
 
 
@@ -205,10 +204,7 @@ const CardMesaContainer = styled.TouchableOpacity<CardMesaContainerProps>`
   background-color: ${ ({cor}) => coresMap[cor] };
   border-radius: 8px;
   padding: 12px;
-  margin: 4px;
-  min-height: 120px;
-  flex-basis: 30%;
-  max-width: 30%;
+  min-height: 140px;
 `;
 
 const CardMesaClienteComanda = styled.View`

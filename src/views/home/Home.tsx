@@ -22,7 +22,7 @@ export default function HomeScreen() {
           </HomeContainerTitle>
 
           <BodyContainer>
-            <BodyTitle>Caixa 10</BodyTitle>
+            <BodyTitle>Joaquim</BodyTitle>
             <BodySubTitle>Zigpi Restaurante</BodySubTitle>
 
             <CardContainer>

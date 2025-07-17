@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
-import React, { useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { ActivityIndicator, FlatList, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import CardMesa from '../../components/CardMesa/CardMesa';
@@ -16,16 +16,25 @@ import {
 } from "../../styles/styleCss";
 import { ButtonRenderProps, CardRenderProps, TipoFiltro } from "../../types";
 import { COLORS } from '../../types/colors';
+import { useWindowDimensions } from 'react-native';
 
 const otherButtons: TipoFiltro[] = [
-    'Em atendimento',
-    'Ociosas',
-    'Disponíveis',
-    'Sem pedidos',
-    'Meus atendimentos'
+  'Em atendimento',
+  'Ociosas',
+  'Disponíveis',
+  'Sem pedidos',
+  'Meus atendimentos'
 ];
 
 export default function MapaAtendimento() {
+
+  const { width } = useWindowDimensions();
+  const numColumns = 3;
+  const spacing = 16; // espaçamento entre os cards
+  const totalSpacing = spacing * (numColumns + 1);
+  const cardWidth = (width - totalSpacing) / numColumns;
+
+
   const navigation = useNavigation<any>();
   const flatListRef = useRef<FlatList>(null);
   const filterScrollRef = useRef<FlatList>(null);
@@ -71,7 +80,7 @@ export default function MapaAtendimento() {
   );
 
   const renderCard = ({ item }: CardRenderProps) => (
-    <CardMesa mesa={item} />
+    <CardMesa mesa={item} largura={cardWidth} />
   );
 
   const renderFooter = () => {
@@ -130,8 +139,13 @@ export default function MapaAtendimento() {
           keyExtractor={(item) => item.id.toString()}
           numColumns={3}
           contentContainerStyle={{
-            paddingVertical: 8,
+            paddingTop: 8,
             paddingBottom: 20,
+            paddingHorizontal: spacing
+          }}
+          columnWrapperStyle={{
+            justifyContent: 'space-between',
+            marginBottom: spacing,
           }}
           showsVerticalScrollIndicator={false}
           style={{ flex: 1 }}

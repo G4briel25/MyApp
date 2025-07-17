@@ -138,7 +138,7 @@
       "numeroClientes": 6,
       "numeroComandas": 3,
       "tempoEmAberto": 9,
-      "atendente": "Ghabrichelson",
+      "atendente": "Joaquim",
       "valorTotal": 34.56,
       "cor": "verde",
       "ultimoPedido": "2025-01-16T10:01:00Z"
@@ -151,7 +151,7 @@
       "numeroClientes": 1,
       "numeroComandas": 1,
       "tempoEmAberto": 17,
-      "atendente": "Ghabrichelson",
+      "atendente": "Joaquim",
       "valorTotal": 34.56,
       "cor": "vermelho",
       "ultimoPedido": "2025-01-16T09:53:00Z"
@@ -229,7 +229,7 @@
       "numeroClientes": 1,
       "numeroComandas": 1,
       "tempoEmAberto": 8,
-      "atendente": "Ghabrichelson",
+      "atendente": "Joaquim",
       "valorTotal": 42.30,
       "cor": "verde",
       "ultimoPedido": "2025-01-16T10:02:00Z"
@@ -359,7 +359,7 @@
       "numeroClientes": 1,
       "numeroComandas": 1,
       "tempoEmAberto": 4,
-      "atendente": "Ghabrichelson",
+      "atendente": "Joaquim",
       "valorTotal": 0,
       "cor": "amarelo",
       "ultimoPedido": "2025-01-16T10:06:00Z"
@@ -389,33 +389,6 @@
       "valorTotal": 45.80,
       "cor": "verde",
       "ultimoPedido": "2025-01-16T10:03:00Z"
-    }
-  ],
-  "atendentes": [
-    {
-      "id": 1,
-      "nome": "Leonercio",
-      "ativo": true
-    },
-    {
-      "id": 2,
-      "nome": "Ghabrichelson",
-      "ativo": true
-    },
-    {
-      "id": 3,
-      "nome": "Maria",
-      "ativo": true
-    },
-    {
-      "id": 4,
-      "nome": "João",
-      "ativo": true
-    },
-    {
-      "id": 5,
-      "nome": "Ana",
-      "ativo": true
     }
   ]
 }

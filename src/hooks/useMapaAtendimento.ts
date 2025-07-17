@@ -59,7 +59,7 @@ export function useMapaAtendimento() {
                 filtered = filtered.filter(mesa => mesa.status === 'ocupada');
                 break;
             case 'Ociosas':
-                filtered = filtered.filter(mesa => mesa.status === 'livre');
+                filtered = filtered.filter(mesa => mesa.tempoEmAberto > 10 );
                 break;
             case 'Disponíveis':
                 filtered = filtered.filter(mesa => mesa.status === 'livre');
@@ -68,7 +68,7 @@ export function useMapaAtendimento() {
                 filtered = filtered.filter(mesa => mesa.valorTotal === 0 && mesa.status === 'ocupada');
                 break;
             case 'Meus atendimentos':
-                filtered = filtered.filter(mesa => mesa.atendente === 'Ghabrichelson');
+                filtered = filtered.filter(mesa => mesa.atendente === 'Joaquim');
                 break;
             case 'Visão Geral':
             default:

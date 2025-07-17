@@ -9,9 +9,9 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import { CardMesaProps } from "../../types";
 import { formatarMoeda } from "../../utils/formatarMoeda";
 
-export default function CardMesa({ mesa }: CardMesaProps) {
+export default function CardMesa({ mesa, largura }: CardMesaProps & { largura: number }) {
   return (
-    <CardMesaContainer cor={mesa.cor}>
+    <CardMesaContainer cor={mesa.cor} style={{ width: largura }}>
       <CardMesaNumero>{mesa.numero}</CardMesaNumero>
 
       {mesa.status != 'livre' ? (
@@ -48,7 +48,9 @@ export default function CardMesa({ mesa }: CardMesaProps) {
           </CardMesaClienteComanda>
           <CardMesaFrame>
             <Icon name="access-time-filled" size={12} />
-            <CardMesaFrameText>{mesa.tempoEmAberto}</CardMesaFrameText>
+            <CardMesaFrameText>
+              {`${mesa.tempoEmAberto}min`}
+            </CardMesaFrameText>
           </CardMesaFrame>
           <CardMesaFrame>
             <Icon name="monetization-on" size={12} />
