@@ -8,10 +8,11 @@ export default function CardsHome({
     iconName,
     title,
     iconSize = 32,
-    onPress
-}: CardsHomeProps) {
+    onPress,
+    largura
+}: CardsHomeProps & { largura: number }) {
     return (
-        <Cards onPress={onPress}>
+        <Cards onPress={onPress} style={{ width: largura }}>
             <View>
                 <Icon name={iconName} size={iconSize} />
             </View>

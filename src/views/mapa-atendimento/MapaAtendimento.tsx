@@ -6,154 +6,160 @@ import CardMesa from '../../components/CardMesa/CardMesa';
 import HeaderGlobal from '../../components/HeaderGlobal/HeaderGlobal';
 import { useMapaAtendimento } from '../../hooks/useMapaAtendimento';
 import {
-  MapaAtendimentoBotoes,
-  MapaAtendimentoContainer,
-  MapaAtendimentoInput,
-  MapaAtendimentoMesa,
-  MapaAtendimentoPesquisa,
-  MapaAtendimentoTouchableOpacity,
-  MapaAtendimentoTouchTitle
+	MapaAtendimentoBotoes,
+	MapaAtendimentoContainer,
+	MapaAtendimentoInput,
+	MapaAtendimentoMesa,
+	MapaAtendimentoPesquisa,
+	MapaAtendimentoTouchableOpacity,
+	MapaAtendimentoTouchTitle
 } from "../../styles/styleCss";
 import { ButtonRenderProps, CardRenderProps, TipoFiltro } from "../../types";
 import { COLORS } from '../../types/colors';
 import { useWindowDimensions } from 'react-native';
 
 const otherButtons: TipoFiltro[] = [
-  'Em atendimento',
-  'Ociosas',
-  'Disponíveis',
-  'Sem pedidos',
-  'Meus atendimentos'
+	'Em atendimento',
+	'Ociosas',
+	'Disponíveis',
+	'Sem pedidos',
+	'Meus atendimentos'
 ];
 
 export default function MapaAtendimento() {
 
-  const { width } = useWindowDimensions();
-  const numColumns = 3;
-  const spacing = 16; // espaçamento entre os cards
-  const totalSpacing = spacing * (numColumns + 1);
-  const cardWidth = (width - totalSpacing) / numColumns;
+	const { width } = useWindowDimensions();
+	const numColumns = 3;
+	const spacing = 16; // espaçamento entre os cards
+	const totalSpacing = spacing * (numColumns + 1);
+	const cardWidth = (width - totalSpacing) / numColumns;
 
+	const navigation = useNavigation<any>();
+	const flatListRef = useRef<FlatList>(null);
+	const filterScrollRef = useRef<FlatList>(null);
 
-  const navigation = useNavigation<any>();
-  const flatListRef = useRef<FlatList>(null);
-  const filterScrollRef = useRef<FlatList>(null);
+	const {
+		mesasFiltradas,
+		loading,
+		activeButton,
+		searchText,
+		setSearchText,
+		setActiveButton,
+		loadMoreMesas,
+		hasMore
+	} = useMapaAtendimento();
 
-  const {
-    mesasFiltradas,
-    loading,
-    activeButton,
-    searchText,
-    setSearchText,
-    setActiveButton,
-    loadMoreMesas
-  } = useMapaAtendimento();
+	const handlerFilterPress = (filtro: TipoFiltro) => {
+		setActiveButton(filtro);
 
-  const handlerFilterPress = (filtro: TipoFiltro) => {
-    setActiveButton(filtro);
+		if (flatListRef.current) {
+			flatListRef.current.scrollToOffset({ offset: 0, animated: true });
+		}
 
-    if (flatListRef.current) {
-      flatListRef.current.scrollToOffset({ offset: 0, animated: true });
-    }
+		if (filtro !== 'Visão Geral' && filterScrollRef.current) {
+			const index = otherButtons.indexOf(filtro);
+			if (index !== -1) {
+				filterScrollRef.current.scrollToIndex({
+					index,
+					animated: true,
+					viewPosition: 0.5
+				});
+			}
+		}
+	};
 
-    if (filtro !== 'Visão Geral' && filterScrollRef.current) {
-      const index = otherButtons.indexOf(filtro);
-      if (index !== -1) {
-        filterScrollRef.current.scrollToIndex({
-          index,
-          animated: true,
-          viewPosition: 0.5
-        });
-      }
-    }
-  };
+	const renderButton = ({ item }: ButtonRenderProps) => (
+		<MapaAtendimentoTouchableOpacity
+			isActive={activeButton === item}
+			onPress={() => handlerFilterPress(item as TipoFiltro)}
+		>
+			<MapaAtendimentoTouchTitle isActive={activeButton === item}>
+				{item}
+			</MapaAtendimentoTouchTitle>
+		</MapaAtendimentoTouchableOpacity>
+	);
 
-  const renderButton = ({ item }: ButtonRenderProps) => (
-    <MapaAtendimentoTouchableOpacity
-      isActive={activeButton === item}
-      onPress={() => handlerFilterPress(item as TipoFiltro)}
-    >
-      <MapaAtendimentoTouchTitle isActive={activeButton === item}>
-        {item}
-      </MapaAtendimentoTouchTitle>
-    </MapaAtendimentoTouchableOpacity>
-  );
+	const renderCard = ({ item }: CardRenderProps) => (
+		<CardMesa mesa={item} largura={cardWidth} />
+	);
 
-  const renderCard = ({ item }: CardRenderProps) => (
-    <CardMesa mesa={item} largura={cardWidth} />
-  );
+	const renderFooter = () => {
+		if (!loading || !hasMore) return null;
 
-  const renderFooter = () => {
-    if (!loading) return null;
+		return (
+			<View style={{ padding: 16, alignItems: 'center' }}>
+				<ActivityIndicator size="small" color={COLORS.COLOR_PIGZ} />
+			</View>
+		);
+	};
 
-    return (
-      <View style={{ padding: 16, alignItems: 'center' }}>
-        <ActivityIndicator size="small" color={COLORS.COLOR_PIGZ} />
-      </View>
-    );
-  };
+	// Função para lidar com o onEndReached
+	const handleLoadMore = () => {
+		if (hasMore && !loading) {
+			loadMoreMesas();
+		}
+	};
 
-  return (
-    <MapaAtendimentoContainer>
-      <HeaderGlobal
-        title='Mapa de atendimento'
-        onBackPress={() => navigation.goBack()}
-      />
+	return (
+		<MapaAtendimentoContainer>
+			<HeaderGlobal
+				title='Mapa de atendimento'
+				onBackPress={() => navigation.goBack()}
+			/>
 
-      <MapaAtendimentoPesquisa>
-        <Icon name="search" size={32} color={COLORS.COLOR_PIGZ} />
-        <MapaAtendimentoInput
-          placeholder="Cliente, mesa, comanda, atendente"
-          value={searchText}
-          onChangeText={setSearchText}
-        />
-      </MapaAtendimentoPesquisa>
+			<MapaAtendimentoPesquisa>
+				<Icon name="search" size={32} color={COLORS.COLOR_PIGZ} />
+				<MapaAtendimentoInput
+					placeholder="Cliente, mesa, comanda, atendente"
+					value={searchText}
+					onChangeText={setSearchText}
+				/>
+			</MapaAtendimentoPesquisa>
 
-      <MapaAtendimentoBotoes>
-        <MapaAtendimentoTouchableOpacity
-          isActive={activeButton === 'Visão Geral'}
-          onPress={() => handlerFilterPress('Visão Geral')}
-        >
-          <MapaAtendimentoTouchTitle isActive={activeButton === 'Visão Geral'}>
-            Visão Geral
-          </MapaAtendimentoTouchTitle>
-        </MapaAtendimentoTouchableOpacity>
+			<MapaAtendimentoBotoes>
+				<MapaAtendimentoTouchableOpacity
+					isActive={activeButton === 'Visão Geral'}
+					onPress={() => handlerFilterPress('Visão Geral')}
+				>
+					<MapaAtendimentoTouchTitle isActive={activeButton === 'Visão Geral'}>
+						Visão Geral
+					</MapaAtendimentoTouchTitle>
+				</MapaAtendimentoTouchableOpacity>
 
-        <FlatList<TipoFiltro>
-          ref={filterScrollRef}
-          data={otherButtons}
-          renderItem={renderButton}
-          keyExtractor={(item, index) => index.toString()}
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          style={{ flex: 1 }}
-          onScrollToIndexFailed={() => {}}
-        />
-      </MapaAtendimentoBotoes>
+				<FlatList<TipoFiltro>
+					ref={filterScrollRef}
+					data={otherButtons}
+					renderItem={renderButton}
+					keyExtractor={(item, index) => index.toString()}
+					horizontal
+					showsHorizontalScrollIndicator={false}
+					style={{ flex: 1 }}
+					onScrollToIndexFailed={() => { }}
+				/>
+			</MapaAtendimentoBotoes>
 
-      <MapaAtendimentoMesa>
-        <FlatList
-          ref={flatListRef}
-          data={mesasFiltradas}
-          renderItem={renderCard}
-          keyExtractor={(item) => item.id.toString()}
-          numColumns={3}
-          contentContainerStyle={{
-            paddingTop: 8,
-            paddingBottom: 20,
-            paddingHorizontal: spacing
-          }}
-          columnWrapperStyle={{
-            justifyContent: 'space-between',
-            marginBottom: spacing,
-          }}
-          showsVerticalScrollIndicator={false}
-          style={{ flex: 1 }}
-          onEndReached={loadMoreMesas}
-          onEndReachedThreshold={0.1}
-          ListFooterComponent={renderFooter}
-        />
-      </MapaAtendimentoMesa>
-    </MapaAtendimentoContainer>
-  );
+			<MapaAtendimentoMesa>
+				<FlatList
+					ref={flatListRef}
+					data={mesasFiltradas}
+					renderItem={renderCard}
+					keyExtractor={(item) => item.id.toString()}
+					numColumns={3}
+					contentContainerStyle={{
+						paddingTop: 8,
+						paddingHorizontal: spacing
+					}}
+					columnWrapperStyle={{
+						justifyContent: 'space-between',
+						marginBottom: spacing,
+					}}
+					showsVerticalScrollIndicator={false}
+					style={{ flex: 1 }}
+					onEndReached={handleLoadMore}
+					onEndReachedThreshold={0.1}
+					ListFooterComponent={renderFooter}
+				/>
+			</MapaAtendimentoMesa>
+		</MapaAtendimentoContainer>
+	);
 }

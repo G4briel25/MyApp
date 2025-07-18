@@ -4,6 +4,7 @@ import { CardMesaContainerProps } from '../types/cardMesaContainerProps';
 
 const HomeContainer = styled.View`
   background-color: #FFF;
+  flex: 1;
 `;
 
 const HomeContainerTitle = styled.View`
@@ -24,11 +25,9 @@ const HomeTitle = styled.Text`
   color: ${COLORS.COLOR_PIGZ};
 `;
 
-const BodyContainer = styled.View`
-  width: 100%;
-  height: 100%;
-  padding: 16px;
-  background-color: #FFF;
+const BodyContainerHeader = styled.View`
+  margin-top: 8px;
+  margin-bottom: 16px;
 `;
 
 const BodyTitle = styled.Text`
@@ -42,37 +41,32 @@ const BodySubTitle = styled.Text`
 `;
 
 const CardContainer = styled.View`
-  margin-top: 20px;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-between;
 `;
 
 
 // Componente CardsHome
 const Cards = styled.TouchableOpacity`
-  padding: 16px 16px 20px 16px;
+  padding: 16px;
   background-color: #F4F2F2;
   border-radius: 8px;
   height: 156px;
-  width: 48%;
-  margin-bottom: 16px;
-  display: flex;
   justify-content: space-between;
 `;
 
 const CardTitle = styled.Text`
   font-size: 17px;
   color: #212121;
+  font-family: 'Poppins-Regular'
 `;
 
 
 // Componente ModalNovoPedido
 const NovoPedidoContainer = styled.View`
   background-color: white;
-  padding: 12px 16px 16px 16px;
+  padding: 16px;
   border-radius: 16px 16px 0 0;
-  min-height: 400px;
   align-items: center;
 `;
 
@@ -237,7 +231,7 @@ export {
   HomeContainer,
   HomeContainerTitle,
   HomeTitle,
-  BodyContainer,
+  BodyContainerHeader,
   BodyTitle,
   BodySubTitle,
   CardContainer,
