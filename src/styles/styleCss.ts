@@ -190,6 +190,7 @@ const MapaAtendimentoTouchTitle = styled.Text<{isActive: boolean}>`
 
 const MapaAtendimentoMesa = styled.View`
   flex: 1;
+  //background-color: #F00;
 `;
 
 

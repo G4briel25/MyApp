@@ -12,17 +12,14 @@ import CardsHome from '../../components/CardsHome/CardsHome';
 import { useNavigation } from '@react-navigation/native';
 import ModalNovoPedido from '../modal-novo-pedido/ModalNovoPedido';
 import PigzLogo from '../../components/PigzLogo/PigzLogo';
-import { useWindowDimensions, FlatList, View } from 'react-native';
+import { FlatList } from 'react-native';
+import { useResponsiveColumns } from '../../hooks/useResponsiveColumns';
 
 export default function HomeScreen() {
 
   const navigation = useNavigation<any>();
-  const { width, height } = useWindowDimensions();
-  const isLandscape = width > height;
   const spacing = 16; // espaçamento entre os cards
-  const numColumns = isLandscape ? 3 : 2;
-  const totalSpacing = spacing * (numColumns + 1);
-  const cardWidth = (width - totalSpacing) / numColumns;
+  const { numColumns, cardWidth } = useResponsiveColumns(160, spacing);
 
   const [isModalVisible, setModalVisible] = useState(false);
 
@@ -45,16 +42,6 @@ export default function HomeScreen() {
     {
       key: 'config',
       iconName: 'settings',
-      title: 'Configurações'
-    },
-    {
-      key: 'config1',
-      iconName: 'settings2',
-      title: 'Configurações'
-    },
-    {
-      key: 'config2',
-      iconName: 'settings3',
       title: 'Configurações'
     }
   ]
@@ -80,11 +67,11 @@ export default function HomeScreen() {
               <BodySubTitle>Zigpi Restaurante</BodySubTitle>
             </BodyContainerHeader>            
           }
-          numColumns={isLandscape ? 3 : 2}
+          numColumns={numColumns}
           columnWrapperStyle={{
             justifyContent: 'flex-start',
             marginBottom: spacing,
-            gap: 16
+            gap: spacing
           }}
           renderItem={({ item }) => (
             <CardContainer>
