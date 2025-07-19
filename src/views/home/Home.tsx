@@ -14,6 +14,7 @@ import ModalNovoPedido from '../modal-novo-pedido/ModalNovoPedido';
 import PigzLogo from '../../components/PigzLogo/PigzLogo';
 import { FlatList } from 'react-native';
 import { useResponsiveColumns } from '../../hooks/useResponsiveColumns';
+import PigzLogo1 from '../../components/PigzLogo/PigzLogo1';
 
 export default function HomeScreen() {
 
@@ -49,8 +50,7 @@ export default function HomeScreen() {
   return (
     <HomeContainer>
       <HomeContainerTitle>
-        <PigzLogo />
-        <HomeTitle>Comanda</HomeTitle>
+        <PigzLogo1 />
       </HomeContainerTitle>
 
         <FlatList

@@ -107,6 +107,7 @@ export default function MapaAtendimento() {
         <Icon name="search" size={32} color={COLORS.COLOR_PIGZ} />
         <MapaAtendimentoInput
           placeholder="Cliente, mesa, comanda, atendente"
+          placeholderTextColor={'#616161'}
           value={searchText}
           onChangeText={setSearchText}
         />

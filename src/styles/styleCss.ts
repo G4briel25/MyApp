@@ -9,13 +9,12 @@ const HomeContainer = styled.View`
 
 const HomeContainerTitle = styled.View`
   width: 100%;
-  padding: 10px 0;
+  padding: 22px 0;
   border-bottom-width: 1px;
   border-bottom-color: #DDD;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  gap: 5px;
 `;
 
 const HomeTitle = styled.Text`
@@ -64,7 +63,7 @@ const CardTitle = styled.Text`
 
 // Componente ModalNovoPedido
 const NovoPedidoContainer = styled.View`
-  background-color: white;
+  background-color: #FFF;
   padding: 16px;
   border-radius: 16px 16px 0 0;
   align-items: center;
