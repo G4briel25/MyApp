@@ -4,7 +4,6 @@ import { ActivityIndicator, FlatList, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import CardMesa from '../../components/CardMesa/CardMesa';
 import HeaderGlobal from '../../components/HeaderGlobal/HeaderGlobal';
-import { useMapaAtendimento } from '../../hooks/useMapaAtendimento';
 import {
   MapaAtendimentoBotoes,
   MapaAtendimentoContainer,
@@ -16,6 +15,7 @@ import {
 } from "../../styles/styleCss";
 import { ButtonRenderProps, CardRenderProps, TipoFiltro } from "../../types";
 import { COLORS } from '../../types/colors';
+import { useMapaAtendimento } from '../../hooks/useMapaAtendimento';
 import { useResponsiveColumns } from '../../hooks/useResponsiveColumns';
 
 const otherButtons: TipoFiltro[] = [
