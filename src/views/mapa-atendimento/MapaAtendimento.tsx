@@ -84,7 +84,7 @@ export default function MapaAtendimento() {
 
     return (
       <View style={{ padding: 16, alignItems: 'center' }}>
-        <ActivityIndicator size="small" color={COLORS.COLOR_PIGZ} />
+        <ActivityIndicator size="large" color={COLORS.COLOR_PIGZ} />
       </View>
     );
   };
