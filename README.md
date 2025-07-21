@@ -64,7 +64,7 @@ json-server --watch db.json --port 3000
 
 ## 🌐 Configuração de IP para a API
 
-### Você deve ajustar o IP no arquivo `mesaService.ts`, de acordo onde está rodando o app:
+### Você deve ajustar o IP no arquivo `mesaService.ts`, de acordo com onde está rodando o app:
 
 ```ts
 const LOCAL_IP = '192.168.x.x'; // IP da sua máquina
