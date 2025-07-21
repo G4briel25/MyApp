@@ -17,6 +17,7 @@ import { ButtonRenderProps, CardRenderProps, TipoFiltro } from "../../types";
 import { COLORS } from '../../types/colors';
 import { useMapaAtendimento } from '../../hooks/useMapaAtendimento';
 import { useResponsiveColumns } from '../../hooks/useResponsiveColumns';
+import SkeletonMapaAtendimento from '../../components/Skeleton/SkeletonMapaAtendimento';
 
 const otherButtons: TipoFiltro[] = [
   'Em atendimento',
@@ -32,9 +33,10 @@ export default function MapaAtendimento() {
   const filterScrollRef = useRef<FlatList>(null);
 
   const spacing = 16; // espaçamento entre os cards
-  const { numColumns, cardWidth } = useResponsiveColumns(120, spacing);
+  const { numColumns, cardWidth } = useResponsiveColumns(115, spacing);
 
   const {
+    isReady,
     mesasFiltradas,
     loading,
     activeButton,
@@ -78,6 +80,15 @@ export default function MapaAtendimento() {
   const renderCard = ({ item }: CardRenderProps) => (
     <CardMesa mesa={item} largura={cardWidth} />
   );
+
+  if (!isReady) {
+    return (
+      // <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      //   <ActivityIndicator size="large" color={COLORS.COLOR_PIGZ} />
+      // </View>
+      <SkeletonMapaAtendimento />
+    );
+  }
 
   const renderFooter = () => {
     if (!loading || !hasMore) return null;
@@ -136,36 +147,43 @@ export default function MapaAtendimento() {
       </MapaAtendimentoBotoes>
 
       <MapaAtendimentoMesa>
-        <FlatList
-          key={numColumns}
-          numColumns={numColumns}
-          data={mesasFiltradas}
-          ref={flatListRef}
-          renderItem={renderCard}
-          keyExtractor={(item) => item.id.toString()}
-          contentContainerStyle={{
-            paddingTop: 8,
-            paddingHorizontal: spacing
-          }}
-          columnWrapperStyle={{
-            gap: spacing,
-            marginBottom: spacing,
-          }}
-          showsVerticalScrollIndicator={false}
-          onEndReached={handleLoadMore}
-          onEndReachedThreshold={0.1}
-          ListFooterComponent={renderFooter}
-          ListEmptyComponent={
-            !loading ? (
-              <View style={{ alignItems: 'center', marginTop: 40 }}>
-                <View style={{ height: 8 }} />
-                <MapaAtendimentoTouchTitle isActive={false}>
-                  Nenhum item encontrado
-                </MapaAtendimentoTouchTitle>
-              </View>
-            ) : null
-          }
-        />
+        {loading && mesasFiltradas.length === 0 ? (
+          <ActivityIndicator
+            size="large"
+            color={COLORS.COLOR_PIGZ}
+            style={{ marginTop: 40 }}
+          />
+        ) : (
+          <FlatList
+            key={numColumns}
+            numColumns={numColumns}
+            data={mesasFiltradas}
+            ref={flatListRef}
+            renderItem={renderCard}
+            keyExtractor={(item) => item.id.toString()}
+            contentContainerStyle={{
+              paddingTop: 8,
+              paddingHorizontal: spacing,
+            }}
+            columnWrapperStyle={{
+              gap: spacing,
+              marginBottom: spacing,
+            }}
+            showsVerticalScrollIndicator={false}
+            onEndReached={handleLoadMore}
+            onEndReachedThreshold={0.1}
+            ListEmptyComponent={
+              !loading ? (
+                <View style={{ alignItems: 'center', marginTop: 40 }}>
+                  <View style={{ height: 8 }} />
+                  <MapaAtendimentoTouchTitle isActive={false}>
+                    Nenhum item encontrado
+                  </MapaAtendimentoTouchTitle>
+                </View>
+              ) : null
+            }
+          />
+        )}
       </MapaAtendimentoMesa>
     </MapaAtendimentoContainer>
   );

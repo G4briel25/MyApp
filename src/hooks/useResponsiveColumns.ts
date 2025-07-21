@@ -1,20 +1,14 @@
-import { useWindowDimensions } from "react-native";
+import { useWindowDimensions } from 'react-native';
 
-export function useResponsiveColumns(idealCardWidth: number, spacing: number) {
-    const { width } = useWindowDimensions();
+export function useResponsiveColumns(minCardWidth: number, gap: number = 16) {
+  const { width } = useWindowDimensions();
 
-    const numColumns = Math.max(
-        1,
-        Math.floor((width + spacing) / (idealCardWidth + spacing))
-    );
+  const horizontalPadding = 2 * gap;
+  const availableWidth = width - horizontalPadding;
 
-    const totalSpacing = spacing * (numColumns + 1);
-    const cardWidth = (width - totalSpacing) / numColumns;
+  const numColumns = Math.floor((availableWidth + gap) / (minCardWidth + gap));
+  const totalGap = gap * (numColumns - 1);
+  const cardWidth = Math.floor((availableWidth - totalGap) / numColumns);
 
-    return (
-        {
-            numColumns,
-            cardWidth
-        }
-    );
+  return { numColumns, cardWidth };
 }

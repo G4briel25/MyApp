@@ -4,6 +4,7 @@ import { AppDispatch, RootState } from '../redux/store';
 import { fetchMesas, clearMesas } from '../redux/slices/mesaSlice';
 import { Mesa, TipoFiltro } from '../types';
 import { Alert } from 'react-native';
+import { InteractionManager } from 'react-native';
 
 export function useMapaAtendimento() {
   const dispatch = useDispatch<AppDispatch>();
@@ -16,11 +17,12 @@ export function useMapaAtendimento() {
   const [hasMore, setHasMore] = useState(true);
   const [loadingMore, setLoadingMore] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
+  const [isReady, setIsReady] = useState(false);
 
   const PER_PAGE = 20;
 
   const loadMesas = useCallback(async (
-    pageNumber: number, 
+    pageNumber: number,
     isRefresh: boolean = false,
     isLoadMore: boolean = false
   ) => {
@@ -33,10 +35,10 @@ export function useMapaAtendimento() {
         setLoadingMore(true);
       }
 
-      const result = await dispatch(fetchMesas({ 
-        page: pageNumber, 
+      const result = await dispatch(fetchMesas({
+        page: pageNumber,
         perPage: PER_PAGE,
-        isLoadMore 
+        isLoadMore
       }));
 
       if (fetchMesas.rejected.match(result)) {
@@ -121,7 +123,12 @@ export function useMapaAtendimento() {
   }, []);
 
   useEffect(() => {
-    loadMesas(1, false, false); // Primeira carga
+    const task = InteractionManager.runAfterInteractions(async () => {
+      await loadMesas(1, false, false);
+      setIsReady(true);
+    });
+
+    return () => task.cancel();
   }, []);
 
   useEffect(() => {
@@ -146,5 +153,6 @@ export function useMapaAtendimento() {
     totalMesas: mesas.length,
     totalMesasFiltradas: mesasFiltradas.length,
     isFiltering: activeButton !== 'Visão Geral' || searchText.trim() !== '',
+    isReady,
   };
 }

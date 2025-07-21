@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View} from "react-native";
+import { View} from "react-native";
 import { Cards, CardTitle } from "../../styles/styleCss";
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { CardsHomeProps } from '../../types/cardsHomeProps';

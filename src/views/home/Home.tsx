@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import {
   HomeContainer,
-  HomeTitle,
   BodyTitle,
   BodySubTitle,
   CardContainer,
@@ -11,10 +10,9 @@ import {
 import CardsHome from '../../components/CardsHome/CardsHome';
 import { useNavigation } from '@react-navigation/native';
 import ModalNovoPedido from '../modal-novo-pedido/ModalNovoPedido';
-import PigzLogo from '../../components/PigzLogo/PigzLogo';
 import { FlatList } from 'react-native';
 import { useResponsiveColumns } from '../../hooks/useResponsiveColumns';
-import PigzLogo1 from '../../components/PigzLogo/PigzLogo1';
+import PigzLogo from '../../components/PigzLogo/PigzLogo';
 
 export default function HomeScreen() {
 
@@ -44,13 +42,19 @@ export default function HomeScreen() {
       key: 'config',
       iconName: 'settings',
       title: 'Configurações'
+    },
+    {
+      key: 'skeleton',
+      iconName: 'dawdawd',
+      title: 'Skeleton',
+      onPress: () => navigation.navigate('SkeletonMapaAtendimento'),
     }
   ]
 
   return (
     <HomeContainer>
       <HomeContainerTitle>
-        <PigzLogo1 />
+        <PigzLogo />
       </HomeContainerTitle>
 
         <FlatList
@@ -65,7 +69,7 @@ export default function HomeScreen() {
             <BodyContainerHeader>
               <BodyTitle>Joaquim</BodyTitle>
               <BodySubTitle>Zigpi Restaurante</BodySubTitle>
-            </BodyContainerHeader>            
+            </BodyContainerHeader>
           }
           numColumns={numColumns}
           columnWrapperStyle={{
