@@ -3,7 +3,7 @@ import axios from 'axios';
 const mesaService = {
     getMesasAll: async (page: number, perPage: number = 20) => {
         try {
-            const API_MESA_URL = `http://192.168.11.224:3000/mesas?_page=${page}&_per_page=${perPage}`;
+            const API_MESA_URL = `http://10.0.2.2:3000/mesas?_page=${page}&_per_page=${perPage}`;
             const response = await axios.get(API_MESA_URL);
             
             return {
