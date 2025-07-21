@@ -67,7 +67,7 @@ export default function CardMesa({ mesa, largura }: CardMesaProps & { largura: n
           </CardMesaFrame>
         </>
       ) : (
-        <></>
+        null
       )}
     </CardMesaContainer>
   );
