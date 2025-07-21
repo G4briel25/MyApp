@@ -155,6 +155,16 @@ export default function MapaAtendimento() {
           onEndReached={handleLoadMore}
           onEndReachedThreshold={0.1}
           ListFooterComponent={renderFooter}
+          ListEmptyComponent={
+            !loading ? (
+              <View style={{ alignItems: 'center', marginTop: 40 }}>
+                <View style={{ height: 8 }} />
+                <MapaAtendimentoTouchTitle isActive={false}>
+                  Nenhum item encontrado
+                </MapaAtendimentoTouchTitle>
+              </View>
+            ) : null
+          }
         />
       </MapaAtendimentoMesa>
     </MapaAtendimentoContainer>
