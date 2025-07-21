@@ -18,7 +18,7 @@ export default function CardMesa({ mesa, largura }: CardMesaProps & { largura: n
         <>
           <CardMesaClienteComanda>
             <CardMesaFrame>
-              {mesa.numeroComandas != 1 ? (
+              {mesa.numeroComandas !== 1 && mesa.numeroComandas !== 0 ? (
                 <>
                   <Icon name="receipt" size={12} />
                   <CardMesaFrameText
@@ -28,7 +28,7 @@ export default function CardMesa({ mesa, largura }: CardMesaProps & { largura: n
                   </CardMesaFrameText>
                 </>
               ) : (
-                <></>
+                null
               )}
             </CardMesaFrame>
 
