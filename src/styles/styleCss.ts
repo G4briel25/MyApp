@@ -55,7 +55,7 @@ const Cards = styled.TouchableOpacity`
 `;
 
 const CardTitle = styled.Text`
-  font-size: 17px;
+  font-size: 16px;
   color: #212121;
   font-family: 'Poppins-Regular'
 `;
