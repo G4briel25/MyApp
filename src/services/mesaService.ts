@@ -1,14 +1,15 @@
 import axios from 'axios';
 
+
 // IP da sua da máquina
-const LOCAL_IP = '192.168.11.224';
+const LOCAL_IP = '192.168.x.x';
+const ANDROID_IP = '10.0.2.2'; // IP do android para caso se estiver usando o emulador Android Studio
 
 const mesaService = {
     getMesasAll: async (page: number, perPage: number = 20) => {
         try {
 
-            // IP do android para caso se estiver usando o emulador Android Studio
-            //const API_MESA_URL = `http://10.0.2.2:3000/mesas?_page=${page}&_per_page=${perPage}`;
+            //const API_MESA_URL = `http://${ANDROID_IP}:3000/mesas?_page=${page}&_per_page=${perPage}`;
             const API_MESA_URL = `http://${LOCAL_IP}:3000/mesas?_page=${page}&_per_page=${perPage}`;
             const response = await axios.get(API_MESA_URL);
             

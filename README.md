@@ -1,97 +1,160 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# 🍽️ Mapa de Atendimento de Mesas
 
-# Getting Started
+## 📋 Visão Geral do Projeto
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+Aplicativo mobile desenvolvido com **React Native** e **TypeScript**, voltado para a **gestão visual de mesas em atendimento** em um restaurante ou lanchonete. Permite a visualização em tempo real do status de cada mesa, cliente, pedidos, valores totais e atendentes, com navegação fluida e interface moderna.
 
-## Step 1: Start Metro
+### ✅ Funcionalidades Principais
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+- 🪑 Visualização do status das mesas (ocupada, livre, etc.)
+- 👥 Exibição de cliente, atendente, comandas e número de pessoas
+- 💵 Valor total e tempo da mesa em aberto
+- 🧾 Modal de criação de novo pedido
+- 🔁 Atualização de dados via Redux + persistência local
+- 🎨 Interface com design leve e responsivo
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+---
 
-```sh
-# Using npm
+## 🚀 Instalação e Execução
+
+### 🔧 Pré-requisitos
+
+- Node.js **18+**
+- Android Studio ou Xcode configurado
+- Dispositivo Android físico **ou** emulador Android configurado
+- `json-server` instalado globalmente ou via `npx`
+
+### ⚙️ Passos para rodar o projeto
+
+```bash
+# 1. Clone o repositório
+git clone https://github.com/G4briel25/MyApp.git
+
+# 2. Acesse a pasta do projeto
+cd MyApp
+
+# 3. Instale as dependências
+npm install
+```
+
+### ▶️ Executar o app
+
+```bash
+# Inicie o bundler
 npm start
 
-# OR using Yarn
-yarn start
-```
-
-## Step 2: Build and run your app
-
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
-
-### Android
-
-```sh
-# Using npm
+# Em outro terminal, execute no Android
 npm run android
-
-# OR using Yarn
-yarn android
 ```
 
-### iOS
+---
 
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
+## 💡 API Local (JSON Server)
 
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
+Inicie o JSON Server para simular os dados:
 
-```sh
-bundle install
+```bash
+json-server --watch db.json --port 3000
 ```
 
-Then, and every time you update your native dependencies, run:
+> A API estará disponível por padrão em:  
+> **http://localhost:3000/mesas**
 
-```sh
-bundle exec pod install
+---
+
+## 🌐 Configuração de IP para a API
+
+### Você deve ajustar o IP no arquivo `mesaService.ts`, de acordo com onde está rodando o app:
+
+```ts
+const LOCAL_IP = '192.168.x.x'; // IP da sua máquina
+
+// Emululador Android Studio: use 10.0.2.2
+// Dispositivo físico via USB: use seu IP local
+const API_MESA_URL = `http://${LOCAL_IP}:3000/mesas?_page=${page}&_per_page=${perPage}`;
 ```
 
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
+### 🧠 Importante:
 
-```sh
-# Using npm
-npm run ios
+| Ambiente                    | IP a ser usado                            |
+|-----------------------------|-------------------------------------------|
+| Emulador Android (AVD)      | `http://10.0.2.2:3000`                     |
+| Dispositivo via USB (real)  | `http://<SEU_IP_LOCAL>:3000`              |
 
-# OR using Yarn
-yarn ios
+Você pode descobrir seu IP local com:
+
+```bash
+ipconfig  # Windows
+ifconfig  # Linux/macOS
+```
+---
+
+## 🛠️ Stack Tecnológica
+
+- **React Native 0.80.1**
+- **TypeScript**
+- **Redux Toolkit + Redux Persist**
+- **React Navigation (Stack, Tabs, Drawer)**
+- **Styled-components**
+- **Axios**
+- **JSON Server**
+
+---
+
+## 📁 Estrutura do Projeto
+
+```
+assets/
+└── fonts/                # Fontes personalizadas (Poppins)
+
+src/
+├── components/           # Componentes reutilizáveis
+│   ├── CardMesa/
+│   ├── CardsHome/
+│   ├── HeaderGlobal/
+│   ├── MesaIcone/
+│   ├── PigzLogo/
+│   ├── ShoppingBagSpeed/
+│   └── TipoPedido/
+├── hooks/                # Hooks personalizados
+├── redux/                # Slices e store do Redux
+│   └── slices/
+├── services/             # Integração com a API (mesaService.ts)
+├── styles/               # Estilos globais e componentes
+├── types/                # Tipagens TypeScript
+├── utils/                # Funções auxiliares
+└── views/                # Telas principais
+    ├── home/
+    ├── mapa-atendimento/
+    └── modal-novo-pedido/
+
+db.json                  # Dados mockados do JSON Server
 ```
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+---
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+## 📦 Scripts Disponíveis
 
-## Step 3: Modify your app
+```bash
+npm start             # Inicia o Metro Bundler
+npm run android       # Executa no Android
+npm run json-server   # Inicia o JSON Server na porta 3000
+```
 
-Now that you have successfully run the app, let's make changes!
+---
 
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
+## 🌍 Ambiente Padrão
 
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
+| Serviço        | URL                             |
+|----------------|----------------------------------|
+| JSON Server    | http://localhost:3000/mesas     |
+| API para app   | http://10.0.2.2:3000 (AVD)       |
+| API via USB    | http://192.168.x.x:3000 (real)  |
 
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
+---
 
-## Congratulations! :tada:
+## 👨‍💻 Autor
 
-You've successfully run and modified your React Native App. :partying_face:
+Desenvolvido por **Gabriel Jaune** — para um desafio técnico frontend.
 
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+---
