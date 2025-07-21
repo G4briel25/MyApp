@@ -64,12 +64,12 @@ json-server --watch db.json --port 3000
 
 ## 🌐 Configuração de IP para a API
 
-### Você deve ajustar o IP no arquivo `mesaService.ts`, de acordo com onde está rodando o app:
+### Você deve ajustar o IP no arquivo `mesaService.ts`, de acordo onde está rodando o app:
 
 ```ts
 const LOCAL_IP = '192.168.x.x'; // IP da sua máquina
 
-// Emululador Android Studio: use 10.0.2.2
+// Emulador Android Studio: use 10.0.2.2
 // Dispositivo físico via USB: use seu IP local
 const API_MESA_URL = `http://${LOCAL_IP}:3000/mesas?_page=${page}&_per_page=${perPage}`;
 ```
