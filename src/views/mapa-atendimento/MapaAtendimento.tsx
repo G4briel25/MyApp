@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import { ActivityIndicator, FlatList, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import CardMesa from '../../components/CardMesa/CardMesa';
@@ -46,12 +46,24 @@ export default function MapaAtendimento() {
     setSearchText,
     setActiveButton,
     loadMoreMesas,
+    setLoadingFiltro,
+    loadingFiltro,
     hasMore
   } = useMapaAtendimento();
 
-  const [loadingFiltro, setLoadingFiltro] = useState(false);
+  // Função para lidar com o onEndReached
+  const handleLoadMore = () => {
+    if (hasMore) {
+      loadMoreMesas();
+    }
+  };
 
   const handlerFilterPress = async (filtro: TipoFiltro) => {
+
+    if(filtro === activeButton) {
+      return;
+    }
+
     try {
       setLoadingFiltro(true);
       setActiveButton(filtro);
@@ -70,8 +82,12 @@ export default function MapaAtendimento() {
           });
         }
       }
+      
+      if(filtro != 'Visão Geral') {
+        loadMoreMesas();
+      }
 
-      await new Promise(resolve => setTimeout(resolve, 300));
+      await new Promise(resolve => setTimeout(resolve, 250));
     } catch (error) {
       console.log(error);
     } finally {
@@ -107,13 +123,6 @@ export default function MapaAtendimento() {
         <ActivityIndicator size="large" color={COLORS.COLOR_PIGZ} />
       </View>
     );
-  };
-
-  // Função para lidar com o onEndReached
-  const handleLoadMore = () => {
-    if (hasMore) {
-      loadMoreMesas();
-    }
   };
 
   return (
@@ -182,7 +191,7 @@ export default function MapaAtendimento() {
             }}
             showsVerticalScrollIndicator={false}
             onEndReached={handleLoadMore}
-            onEndReachedThreshold={0.1}
+            onEndReachedThreshold={1}
             ListEmptyComponent={
               !loading ? (
                 <View style={{ alignItems: 'center', marginTop: 40 }}>

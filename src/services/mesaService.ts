@@ -6,7 +6,7 @@ const LOCAL_IP = '192.168.11.224';
 const ANDROID_IP = '10.0.2.2'; // IP do android para caso se estiver usando o emulador Android Studio
 
 const mesaService = {
-    getMesasAll: async (page: number, perPage: number = 20) => {
+    getMesasAll: async (page: number, perPage: number) => {
         try {
 
             //const API_MESA_URL = `http://${ANDROID_IP}:3000/mesas?_page=${page}&_per_page=${perPage}`;

@@ -18,6 +18,7 @@ export function useMapaAtendimento() {
   const [loadingMore, setLoadingMore] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
   const [isReady, setIsReady] = useState(false);
+  const [loadingFiltro, setLoadingFiltro] = useState(false);
 
   const PER_PAGE = 20;
 
@@ -150,6 +151,8 @@ export function useMapaAtendimento() {
     loadMoreMesas,
     refreshMesas,
     resetFilters,
+    loadingFiltro,
+    setLoadingFiltro,
     totalMesas: mesas.length,
     totalMesasFiltradas: mesasFiltradas.length,
     isFiltering: activeButton !== 'Visão Geral' || searchText.trim() !== '',
