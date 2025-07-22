@@ -42,12 +42,6 @@ export default function HomeScreen() {
       key: 'config',
       iconName: 'settings',
       title: 'Configurações'
-    },
-    {
-      key: 'skeleton',
-      iconName: 'dawdawd',
-      title: 'Skeleton',
-      onPress: () => navigation.navigate('SkeletonMapaAtendimento'),
     }
   ]
 

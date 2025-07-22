@@ -8,7 +8,6 @@ import { store, persistor } from './src/redux/store';
 
 import HomeScreen from './src/views/home/Home';
 import MapaAtendimento from './src/views/mapa-atendimento/MapaAtendimento';
-import SkeletonMapaAtendimento from './src/components/Skeleton/SkeletonMapaAtendimento';
 
 const Stack = createNativeStackNavigator();
 
@@ -20,7 +19,6 @@ export default function App() {
           <Stack.Navigator>
             <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
             <Stack.Screen name='MapaAtendimento' component={MapaAtendimento} options={{ headerShown: false }} />
-            <Stack.Screen name='SkeletonMapaAtendimento' component={SkeletonMapaAtendimento} options={{ headerShown: false }} />
           </Stack.Navigator>
         </NavigationContainer>
       </PersistGate>

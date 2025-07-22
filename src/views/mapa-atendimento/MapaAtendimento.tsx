@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { ActivityIndicator, FlatList, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import CardMesa from '../../components/CardMesa/CardMesa';
@@ -18,6 +18,7 @@ import { COLORS } from '../../types/colors';
 import { useMapaAtendimento } from '../../hooks/useMapaAtendimento';
 import { useResponsiveColumns } from '../../hooks/useResponsiveColumns';
 import SkeletonMapaAtendimento from '../../components/Skeleton/SkeletonMapaAtendimento';
+import SkeletonMapaAtendimentoBotoesFiltros from '../../components/Skeleton/SkeletonMapaAtendimentoBotoesFiltros';
 
 const otherButtons: TipoFiltro[] = [
   'Em atendimento',
@@ -39,6 +40,7 @@ export default function MapaAtendimento() {
     isReady,
     mesasFiltradas,
     loading,
+    loadingMore,
     activeButton,
     searchText,
     setSearchText,
@@ -47,22 +49,33 @@ export default function MapaAtendimento() {
     hasMore
   } = useMapaAtendimento();
 
-  const handlerFilterPress = (filtro: TipoFiltro) => {
-    setActiveButton(filtro);
+  const [loadingFiltro, setLoadingFiltro] = useState(false);
 
-    if (flatListRef.current) {
-      flatListRef.current.scrollToOffset({ offset: 0, animated: true });
-    }
+  const handlerFilterPress = async (filtro: TipoFiltro) => {
+    try {
+      setLoadingFiltro(true);
+      setActiveButton(filtro);
 
-    if (filtro !== 'Visão Geral' && filterScrollRef.current) {
-      const index = otherButtons.indexOf(filtro);
-      if (index !== -1) {
-        filterScrollRef.current.scrollToIndex({
-          index,
-          animated: true,
-          viewPosition: 0.5
-        });
+      if (flatListRef.current) {
+        flatListRef.current.scrollToOffset({ offset: 0, animated: true });
       }
+
+      if (filtro !== 'Visão Geral' && filterScrollRef.current) {
+        const index = otherButtons.indexOf(filtro);
+        if (index !== -1) {
+          filterScrollRef.current.scrollToIndex({
+            index,
+            animated: true,
+            viewPosition: 0.5
+          });
+        }
+      }
+
+      await new Promise(resolve => setTimeout(resolve, 300));
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoadingFiltro(false);
     }
   };
 
@@ -88,8 +101,7 @@ export default function MapaAtendimento() {
   }
 
   const renderFooter = () => {
-    if (!loading || !hasMore) return null;
-
+    if (!hasMore || !loadingMore) return null;
     return (
       <View style={{ padding: 16, alignItems: 'center' }}>
         <ActivityIndicator size="large" color={COLORS.COLOR_PIGZ} />
@@ -99,7 +111,7 @@ export default function MapaAtendimento() {
 
   // Função para lidar com o onEndReached
   const handleLoadMore = () => {
-    if (hasMore && !loading) {
+    if (hasMore) {
       loadMoreMesas();
     }
   };
@@ -144,7 +156,9 @@ export default function MapaAtendimento() {
       </MapaAtendimentoBotoes>
 
       <MapaAtendimentoMesa>
-        {loading && mesasFiltradas.length === 0 ? (
+        {loadingFiltro ? (
+          <SkeletonMapaAtendimentoBotoesFiltros />
+        ) : loading && mesasFiltradas.length === 0 ? (
           <ActivityIndicator
             size="large"
             color={COLORS.COLOR_PIGZ}
@@ -179,9 +193,11 @@ export default function MapaAtendimento() {
                 </View>
               ) : null
             }
+            ListFooterComponent={renderFooter}
           />
         )}
       </MapaAtendimentoMesa>
+
     </MapaAtendimentoContainer>
   );
 }
