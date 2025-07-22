@@ -18,7 +18,7 @@ export default function HomeScreen() {
 
   const navigation = useNavigation<any>();
   const spacing = 16; // espaçamento entre os cards
-  const { numColumns, cardWidth } = useResponsiveColumns(160, spacing);
+  const { numColumns, cardWidth } = useResponsiveColumns(156, spacing);
 
   const [isModalVisible, setModalVisible] = useState(false);
 
@@ -72,11 +72,19 @@ export default function HomeScreen() {
             </BodyContainerHeader>
           }
           numColumns={numColumns}
-          columnWrapperStyle={{
-            justifyContent: 'flex-start',
-            marginBottom: spacing,
-            gap: spacing
-          }}
+          {...(numColumns > 1 && {
+              columnWrapperStyle: {
+              justifyContent: 'flex-start',
+              marginBottom: spacing,
+              gap: spacing
+            }
+          })}
+          {...(numColumns === 1 && {
+            contentContainerStyle: {
+              paddingHorizontal: 16,
+              gap: spacing
+            }
+          })}
           renderItem={({ item }) => (
             <CardContainer>
               <CardsHome
