@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
-import React, { useRef } from 'react';
+import React, { useCallback, useRef } from 'react';
 import { ActivityIndicator, FlatList, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import CardMesa from '../../components/CardMesa/CardMesa';
@@ -60,7 +60,7 @@ export default function MapaAtendimento() {
 
   const handlerFilterPress = async (filtro: TipoFiltro) => {
 
-    if(filtro === activeButton) {
+    if (filtro === activeButton) {
       return;
     }
 
@@ -82,10 +82,8 @@ export default function MapaAtendimento() {
           });
         }
       }
-      
-      if(filtro != 'Visão Geral') {
-        loadMoreMesas();
-      }
+
+      loadMoreMesas();
 
       await new Promise(resolve => setTimeout(resolve, 250));
     } catch (error) {
@@ -106,9 +104,10 @@ export default function MapaAtendimento() {
     </MapaAtendimentoTouchableOpacity>
   );
 
-  const renderCard = ({ item }: CardRenderProps) => (
+  const renderCard = useCallback(({ item }: CardRenderProps) => (
     <CardMesa mesa={item} largura={cardWidth} />
-  );
+  ), [cardWidth]);
+
 
   if (!isReady) {
     return (
