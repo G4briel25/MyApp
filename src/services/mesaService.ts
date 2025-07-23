@@ -2,7 +2,7 @@ import axios from 'axios';
 
 
 // IP da sua da máquina
-const LOCAL_IP = '192.168.11.224';
+const LOCAL_IP = '192.168.8.102';
 const ANDROID_IP = '10.0.2.2'; // IP do android para caso se estiver usando o emulador Android Studio
 
 const mesaService = {
