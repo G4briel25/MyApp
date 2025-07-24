@@ -20,7 +20,7 @@ export function useMapaAtendimento() {
   const [isReady, setIsReady] = useState(false);
   const [loadingFiltro, setLoadingFiltro] = useState(false);
 
-  const PER_PAGE = 10;
+  const PER_PAGE = 20;
 
   const loadMesas = useCallback(async (
     pageNumber: number,
