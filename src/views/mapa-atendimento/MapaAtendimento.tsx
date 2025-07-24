@@ -85,7 +85,7 @@ export default function MapaAtendimento() {
 
       loadMoreMesas();
 
-      await new Promise(resolve => setTimeout(resolve, 250));
+      await new Promise(resolve => setTimeout(resolve, 370));
     } catch (error) {
       console.log(error);
     } finally {
