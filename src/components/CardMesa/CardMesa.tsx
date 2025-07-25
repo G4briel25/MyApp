@@ -13,7 +13,7 @@ import React from 'react';
 
 const CardMesa = React.memo(({ mesa, largura }: CardMesaProps & { largura: number }) => {
   return (
-    <CardMesaContainer cor={mesa.cor} style={{ width: largura }}>
+    <CardMesaContainer testID="card-container" cor={mesa.cor} style={{ width: largura }}>
       <CardMesaNumero>{mesa.numero}</CardMesaNumero>
 
       {mesa.status != 'livre' ? (

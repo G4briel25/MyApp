@@ -85,7 +85,7 @@ export default function MapaAtendimento() {
 
       loadMoreMesas();
 
-      await new Promise(resolve => setTimeout(resolve, 370));
+      await new Promise(resolve => setTimeout(resolve, 380));
     } catch (error) {
       console.log(error);
     } finally {
@@ -190,7 +190,7 @@ export default function MapaAtendimento() {
             }}
             showsVerticalScrollIndicator={false}
             onEndReached={handleLoadMore}
-            onEndReachedThreshold={1}
+            onEndReachedThreshold={0.1}
             ListEmptyComponent={
               !loading ? (
                 <View style={{ alignItems: 'center', marginTop: 40 }}>
