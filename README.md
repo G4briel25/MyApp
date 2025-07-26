@@ -153,6 +153,40 @@ npm run json-server   # Inicia o JSON Server na porta 3000
 
 ---
 
+# 📸 Screenshots
+
+## Tela inicial
+![alt text](./public/home.png)
+## Modal de novo pedido
+![alt text](./public/modal.png)
+## Mapa de atendimento
+![alt text](./public/mapa.png)
+
+
+
+# Filtros
+
+## Filtros de pesquisa
+![alt text](./public/pesquisa.png)
+
+## Em atendimento
+![alt text](./public/em-atendimento.png)
+
+## Ociosas
+![alt text](./public/ociosas.png)
+
+## Disponíveis
+![alt text](./public/disponiveis.png)
+
+## Sem pedidos
+![alt text](./public/sem-pedidos.png)
+
+## Meus atendimentos
+![alt text](./public/meus-atendimentos.png)
+
+
+---
+
 ## 👨‍💻 Autor
 
 Desenvolvido por **Gabriel Jaune** — para um desafio técnico frontend.
