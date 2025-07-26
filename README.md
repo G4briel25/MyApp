@@ -34,7 +34,7 @@ git clone https://github.com/G4briel25/MyApp.git
 cd MyApp
 
 # 3. Instale as dependências
-npm install
+npm install --legacy-peer-deps
 ```
 
 ### ▶️ Executar o app
