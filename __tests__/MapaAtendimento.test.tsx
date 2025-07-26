@@ -2,7 +2,13 @@ import React from 'react';
 import { render, fireEvent } from '@testing-library/react-native';
 import MapaAtendimento from '../src/views/mapa-atendimento/MapaAtendimento';
 
+
+// Teste para testar as funções de filtros e pesquisa
+
 const mockSetSearchText = jest.fn();
+const mockSetActiveButton = jest.fn();
+const mockSetLoadingFiltro = jest.fn();
+const mockLoadMoreMesas = jest.fn();
 
 // Mock do React Navigation
 jest.mock('@react-navigation/native', () => ({
@@ -40,11 +46,6 @@ describe('MapaAtendimento', () => {
     expect(mockSetSearchText).toHaveBeenCalledWith('mesa 10');
   });
 });
-
-
-const mockSetActiveButton = jest.fn();
-const mockSetLoadingFiltro = jest.fn();
-const mockLoadMoreMesas = jest.fn();
 
 describe('MapaAtendimento', () => {
     it('deve chamar o filtro ao pressionar botão "Ociosas"', async () => {

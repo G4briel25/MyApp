@@ -3,6 +3,9 @@ import { render } from "@testing-library/react-native";
 import CardMesa from "../src/components/CardMesa/CardMesa";
 import { Mesa } from "../src/types";
 
+
+// Teste para testar a renderização de uma mesa(cores, informações da mesa, etc).
+
 describe('CardMesa', () => {
     it('deve renderizar as informações da mesa corretamente', () => {
         const mesaMock: Mesa = {

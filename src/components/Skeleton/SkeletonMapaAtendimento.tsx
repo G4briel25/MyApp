@@ -13,7 +13,7 @@ export default function SkeletonMapaAtendimento() {
   // Responsividade para os cards
   const { numColumns, cardWidth } = useResponsiveColumns(115, spacing);
 
-  // Estimativa da altura do cabeçalho + inputs + botões (ajuste se necessário)
+  // Estimativa da altura do cabeçalho + inputs + botões
   const alturaCabecalho = 55 * 2 + 20 + 40 + 20 + 40; // Inputs + margem + botões + margem + header
   const alturaDisponivel = height - alturaCabecalho;
 

@@ -43,7 +43,7 @@ export function useMapaAtendimento() {
       }));
 
       if (fetchMesas.rejected.match(result)) {
-        Alert.alert('Erro', 'Não foi possível carregar as mesas.');
+        console.log('Erro', 'Não foi possível carregar as mesas.');
         return;
       }
 
@@ -55,7 +55,6 @@ export function useMapaAtendimento() {
       }
     } catch (err) {
       console.log('Erro ao carregar mesas:', err);
-      Alert.alert('Erro', 'Erro inesperado ao carregar mesas.');
     } finally {
       setLoadingMore(false);
       setRefreshing(false);
